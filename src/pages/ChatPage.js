@@ -14,6 +14,7 @@ const ChatPage = () => {
 
     return (
         <div>chatPage</div>
+
     )
 }
 
