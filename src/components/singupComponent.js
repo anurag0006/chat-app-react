@@ -1,13 +1,21 @@
 import { Box, Button, FormControl, FormLabel, Input, StackDivider, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+
+
 
 const SingupComponent = () => {
+
+    let navigate = useNavigate();
+
+
+
     const [info, setInfo] = useState({
         name: "",
         email: "",
         password: "",
-        confirmPassword: "",
-        img: ""
+        img: "https://images.pexels.com/photos/4307693/pexels-photo-4307693.jpeg?auto=compress&cs=tinysrgb&w=800"
     })
 
     const handlechange = (e) => {
@@ -23,8 +31,23 @@ const SingupComponent = () => {
     }
 
 
-    const submitHandler = () => {
+    const submitHandler = async () => {
+        try {
+            const res = await axios.post("http://localhost:8000/api/users/signup", {
+                user: info
+            })
 
+            console.log(res.data);
+            localStorage.setItem("user", JSON.stringify(res.data));
+
+
+            window.alert("User created successfully");
+            navigate("/chats");
+
+        }
+        catch (err) {
+            window.alert(err);
+        }
     }
 
 

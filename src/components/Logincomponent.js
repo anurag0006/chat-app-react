@@ -1,7 +1,11 @@
 import { Box, Button, FormControl, FormLabel, Input, StackDivider, VStack } from '@chakra-ui/react'
+import axios from 'axios'
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 const Logincomponent = () => {
+    const navigate = useNavigate();
+
     const [info, setInfo] = useState({
         email: "",
         password: "",
@@ -16,7 +20,21 @@ const Logincomponent = () => {
 
 
 
-    const LoginHandler = () => {
+    const LoginHandler = async () => {
+
+        try {
+            const res = await axios.post("http://localhost:8000/api/users/login", {
+                user: info
+            })
+
+            localStorage.setItem("user", JSON.stringify(res.data));
+            window.alert("Logged in successfully");
+            navigate("/chats");
+
+        }
+        catch (err) {
+            window.alert(err);
+        }
 
     }
 

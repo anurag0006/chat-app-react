@@ -1,7 +1,9 @@
 import { Box, Container, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import Logincomponent from '../components/Logincomponent'
 import SingupComponent from '../components/singupComponent'
+
+
 
 const Home = () => {
     return (
